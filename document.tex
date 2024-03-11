@@ -1,0 +1,55 @@
+\documentclass[10pt,twocolumn]{article}
+
+% use the oxycomps style file
+\usepackage{oxycomps}
+
+% usage: \fixme[comments describing issue]{text to be fixed}
+% define \fixme as not doing anything special
+\newcommand{\fixme}[2][]{#2}
+% overwrite it so it shows up as red
+\renewcommand{\fixme}[2][]{\textcolor{red}{#2}}
+% overwrite it again so related text shows as footnotes
+%\renewcommand{\fixme}[2][]{\textcolor{red}{#2\footnote{#1}}}
+
+% read references.bib for the bibtex data
+\bibliography{references}
+
+% include metadata in the generated pdf file
+\pdfinfo{
+    /Title (Exploring-Solar-Powered-Vehicle-Energy-Modeling-A-Report-Following-WEKA-Tutorial-Guidance)
+    /Author (Julia Chun)
+}
+
+% set the title and author information
+\title{Exploring-Solar-Powered-Vehicle-Energy-Modeling-A-Report-Following-WEKA-Tutorial-Guidance}
+\author{Julia Chun}
+\affiliation{Occidental College}
+\email{jchun2@oxy.edu}
+
+\begin{document}
+
+\maketitle
+
+\section{Introduction}
+
+ With a global concern of rising carbon emissions, the importance of exploring sustainable transportation solutions such as solar-powered vehicles have become increasingly paramount. However, accurately estimating their energy needs is essential for optimizing performance. This document follows a tutorial about application of  data analytics and modeling techniques in predicting energy needs for a solar powered vehicle. The main tutorial that was followed was "How to Build Linear Regression Models (Weka Tutorial #1)"  by the Data Professor on YouTube. In this tutorial, building a linear regression model using the machine learning software WEKA(Waikato Environment for Knowledge Analysis) was discussed. Linear regression is relevant to predicting energy needs for a solar-powered vehicle due to its ability to model the relationship between the independent/target variable such as power output in watts and a dependent variable such as wind speed or pressure.  This tutorial also explains how to effectively analyze and interpret the results.  Furthermore, the paper "Predicting Solar Energy Potential with Machine Learning" by Samuel Miller was referenced and followed. Through following the tutorial, practical experience in gathering data was gained. The goal of following this tutorial and paper was to gain hands-on experience in data analytics to simulate the energy needs for a solar-powered vehicle. 
+
+
+\section{Methods}
+This section discusses the approaches which were undertaken to utilize the "Horizontal Photovoltaic Power Output Data for 12 Sites" from the Northern Hemisphere to aid with my solar-powered vehicle energy modeling project. This dataset serves as a valuable resource for understanding solar energy generation patterns and their potential implications for vehicle energy needs.
+
+\subsection{Data Collection and Pre-processing}
+The acquisition and preprocessing of the "Horizontal Photovoltaic Power Output Data" was guided by the methodology outlined in the paper "Predicting Solar Energy Potential with Machine Learning" by Samuel Miller. It was explained that this dataset accompanies the paper "Machine Learning Modeling of Horizontal Photovoltaics Using Weather and Location Data" submitted to the Journal of Renewable Energy and contained power output from horizontal photovoltaic panels located at 12 Northern hemisphere sites over 14 months. This dataset includes 21045 instances and 17 different features. The target variable is “PolyPwr”, which represents the power output by watts in 15 minute intervals. Independent variables in this dataset include: : location, date, time sampled, latitude, longitude, altitude, year and month, month, hour, season, humidity, ambient temperature, power output from the solar panel, wind speed, visibility, pressure, and cloud ceiling. Additionally, preprocessing steps such as attributes that were removed were explained. In this phase, several attributes that were deemed less useful from the dataset were removed to address the challenge of high dimensionality. These attributes were “Location”, “Longitude”, “Altitude:, and “YRMODAHRMI”.   The paper explained that the decision to eliminate the attribute “Location” was that  although this attribute was highly correlated with the target variable, it would not generalize to unseen data at new locations. Similarly, “Altitude”, despite its negative correlation with “Pressure” failed to offer a distinct explanation for data variance compared to the other attribute. The decision to remove the attribute “YRMODAHRMI” (year, month, day, hour, minute) due to its redundancy to the variables already tracking many of its elements. 
+For the model that was implemented by me,  more attributes were removed  than the ones listed in the paper, as I was using a different software and model than the paper. It was found that because of the large dataset size, the software WEKA would crash due to its computational constraints. Hence, instead of removing the feature, “YRMODAHRMI”, the individual attributes “year”, “month”, “day”, “hour”, and “minute” were removed. Furthermore, for linear regression implementation, the attribute “seasons” was removed as this was not able to be normalized. 
+
+\subsection{Linear Regression }
+Linear regression is a statistical method that models the relationship between a dependent variable(the output) and one or more independent variables (the inputs). The primary objective of linear regression is to find the best-fitting straight line (the regression line) that minimizes the sum squared differences between the actual output values and the predicted values. Following the tutorial by the Data Professor,  WEKA was utilized to construct a linear regression model.  Following the tutorial’s instructions,  the preprocessed dataset was imported into WEKA. Utilizing WEKA's graphical interface, the Linear Regression algorithm was selected, and the relevant input features “Latitude”, “YRMODAHRMI”, “Humidity”, “AmbientTemp”, “Wind.Speed”, “Visibility”, “Pressure”, and “Cloud Ceiling” and target variables (PolyPwr) were specified for model training. The linear regression model was trained on the dataset which allowed WEKA to optimize model parameters using techniques such as gradient descent or closed-form solutions, aiming to minimize the disparity between the predicted and actual power output values. 
+
+
+
+\section{Metrics and Results}
+\section{Reflection }
+
+\printbibliography
+
+\end{document}
